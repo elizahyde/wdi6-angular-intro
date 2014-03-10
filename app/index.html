@@ -1,12 +1,38 @@
-<html ng-app>
+<html ng-app="demoApp">
   <head>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.min.js"></script>
+    <script src="simple_controller.js"></script>
+    <script src="exchange_controller.js"></script>
   </head>
 <body>
 
-<div class="container">
+<div class="container" ng-controller="wdi.SimpleController">
   Check this out: <input type="text" ng-model="name" /> {{name}}
-</div>
 
+<!-- Displaying view from controller -->
+<p> Controller says: {{ welcome }}
+
+<p> Angular Expressions:
+  <ul>
+    <li> 1 + 3 = {{ 1 + 3 }} </li>
+    <li> My balance: {{ 112.25 | currency }} </li>
+    <li> LOWERCASE ME: {{ "LOWERCASE ME" | lowercase }} </li>
+    <li> foo == bar?: {{ "foo" === "bar" }} </li>
+    <li> Need more money?: <input type=checkbox ng-checked="{{ hasSufficientFunds() }}" /> </li>
+  </ul>
+  <!-- Loops -->
+  <p>Search: <input type="text" ng-model="query">
+  <div>
+    <ul>
+      <li ng-repeat="name in names | filter:query">{{name}}</li>
+    </ul>
+  </div>
+  <!-- Click event -->
+  <div ng-controller="wdi.ExchangeController">
+    Euros: <input type="text" ng-model="euros">
+    <button ng-click="convert()">Convert</button>
+    {{ dollars | currency }}
+  </div>
+</div>
 </body>
 </html>
